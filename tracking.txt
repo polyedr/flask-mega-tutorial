@@ -12,4 +12,8 @@ workon flaskmegatutorial
 export FLASK_APP=microblog.py
 
 https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-v-user-logins
-Introduction to Flask-Login
+Now http://127.0.0.1:5000/login?next=%2F doesn't work properly
+
+git config user.email "info@poly-edr.com"
+git config user.name "polyedr"
+
