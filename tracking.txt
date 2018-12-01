@@ -1,5 +1,5 @@
 https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
-
+https://github.com/miguelgrinberg/microblog
 
 export FLASK_APP=microblog.py
 pip install python-dotenv
@@ -17,3 +17,9 @@ Now http://127.0.0.1:5000/login?next=%2F doesn't work properly
 git config user.email "info@poly-edr.com"
 git config user.name "polyedr"
 
+export FLASK_APP=microblog.py
+export FLASK_ENV=development
+flask run
+
+Flask Mega Tutorial - jinja2.exceptions.UndefinedError: 'form' is undefined
+https://stackoverflow.com/questions/19506109/flask-mega-tutorial-jinja2-exceptions-undefinederror-form-is-undefined
