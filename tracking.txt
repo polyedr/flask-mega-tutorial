@@ -21,5 +21,19 @@ export FLASK_APP=microblog.py
 export FLASK_ENV=development
 flask run
 
-Flask Mega Tutorial - jinja2.exceptions.UndefinedError: 'form' is undefined
-https://stackoverflow.com/questions/19506109/flask-mega-tutorial-jinja2-exceptions-undefinederror-form-is-undefined
+flask debug in browser:
+export FLASK_DEBUG=1
+
+large flask applications:
+https://www.digitalocean.com/community/tutorials/how-to-structure-large-flask-applications
+https://gist.github.com/cuibonobo/8696392
+http://flask.pocoo.org/docs/0.12/patterns/packages/
+
+export MAIL_SERVER=smtp.googlemail.com
+export MAIL_PORT=587
+export MAIL_USE_TLS=1
+export MAIL_USERNAME=ivan.ishchukov@gmail.com
+export MAIL_PASSWORD=lucio1984
+
+
+
