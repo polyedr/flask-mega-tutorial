@@ -46,3 +46,14 @@ def reset_password_request():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
 
+applied to the templates:
+{% block content %}
+-->
+{% block app_content %}
+
+https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xi-facelift
+Applying Bootstrap to the templates
+
+https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xii-dates-and-times
+Using Moment.js
+Moment.js makes a moment class available to the browser. The first step to render a timestamp is to create an object of this class, passing the desired timestamp in ISO 8601 format. Here is an example:
