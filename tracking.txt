@@ -36,4 +36,13 @@ export MAIL_USERNAME=ivan.ishchukov@gmail.com
 export MAIL_PASSWORD=lucio1984
 
 
+https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-x-email-support
+
+
+
+I also need a view function to handle this form:
+@app.route('/reset_password_request', methods=['GET', 'POST'])
+def reset_password_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
 
