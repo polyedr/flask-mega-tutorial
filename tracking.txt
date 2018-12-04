@@ -57,3 +57,17 @@ Applying Bootstrap to the templates
 https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xii-dates-and-times
 Using Moment.js
 Moment.js makes a moment class available to the browser. The first step to render a timestamp is to create an object of this class, passing the desired timestamp in ISO 8601 format. Here is an example:
+
+3.12.2018
+https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiii-i18n-and-l10n
+
+flask translate init en-gb
+
+  File "/home/user/Desktop/Programming/Flask/flask-mega-tutorial/microblog/app/cli.py", line 33, in init
+    raise RuntimeError('extract command failed')
+RuntimeError: extract command failed
+
+
+
+
+
