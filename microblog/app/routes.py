@@ -9,6 +9,15 @@ from datetime import datetime
 from app.email import send_password_reset_email
 from app.models import User, Post
 from werkzeug.urls import url_parse
+from guess_language import guess_language
+
+
+@app.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        db.session.commit()
+    g.locale = str(get_locale())
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -17,7 +26,10 @@ from werkzeug.urls import url_parse
 def index():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(body=form.post.data, author=current_user)
+        language = guess_language(form.post.data)
+        if language == 'UNKNOWN' or len(language) > 5:
+            language = ''        
+        post = Post(body=form.post.data, author=current_user, language=language)
         db.session.add(post)
         db.session.commit()
         flash('Your post has been published')
@@ -91,13 +103,6 @@ def user(username):
         if posts.has_prev else None
     
     return render_template('user.html', user=user, posts=posts.items, next_url=next_url, prev_url=prev_url)
-
-@app.before_request
-def before_request():
-    if current_user.is_authenticated:
-        current_user.last_seen = datetime.utcnow()
-        db.session.commit()
-    g.locale = str(get_locale())
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required

@@ -67,6 +67,8 @@ flask translate init en-gb
     raise RuntimeError('extract command failed')
 RuntimeError: extract command failed
 
+https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiv-ajax
+
 
 
 
