@@ -67,7 +67,14 @@ flask translate init en-gb
     raise RuntimeError('extract command failed')
 RuntimeError: extract command failed
 
+skipped the chapter content after: Using a Third-Party Translation Service
 https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiv-ajax
+
+https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xv-a-better-application-structure
+The creation of a blueprint is fairly similar to the creation of an application. This is done in the ___init__.py module of the blueprint package:
+
+blueprint main
+__init__.py
 
 
 
