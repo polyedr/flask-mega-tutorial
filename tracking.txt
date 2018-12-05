@@ -19,6 +19,7 @@ git config user.name "polyedr"
 
 export FLASK_APP=microblog.py
 export FLASK_ENV=development
+export ELASTICSEARCH_URL=http://localhost:9200
 flask run
 
 flask debug in browser:
@@ -75,6 +76,45 @@ The creation of a blueprint is fairly similar to the creation of an application.
 
 blueprint main
 __init__.py
+
+https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xvi-full-text-search
+elastic doesnt't work at flask shell
+Elasticsearch Configuration
+Integrating Elasticsearch into the application is a great example of the power of Flask. This is a service and Python package that does not have anything to do with Flask, yet, I'm going to get a pretty good level of integration, starting from the configuration, which I'm going to write in the app.config dictionary from Flask:
+this test doesn't work, too 
+https://tryolabs.com/blog/2015/02/17/python-elasticsearch-first-steps/
+
+5.12.2018
+Elastic search
+maybe interesting:
+https://losst.ru/ispolzovanie-elasticsearch#_Elasticsearch_Ubuntu
+https://www.elastic.co/guide/en/elasticsearch/reference/2.4/_installation.html
+https://www.elastic.co/guide/en/elasticsearch/guide/current/running-elasticsearch.html
+maybe interesting, follow this:
+https://medium.freecodecamp.org/elasticsearch-with-django-the-easy-way-909375bc16cb
+https://adw0rd.com/2015/12/16/django-elasticsearch/
+maybe interesting:
+https://xakep.ru/2015/06/11/elasticsearch-tutorial/
+kibana:
+https://www.linuxtechi.com/install-elk-stack-elasticsearch-logstash-kibana-centos7-rhel7/
+
+
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.1.1.tar.gz
+tar -xzf elasticsearch-5.1.1.tar.gz
+./elasticsearch-5.1.1/bin/elasticsearch
+
+elastic search:
+https://www.elastic.co/blog/elasticsearch-6-5-0-released
+
+skipped:
+adding it to the .env file as follows:
+ELASTICSEARCH_URL=http://localhost:9200
+
+
+
+
+
+
 
 
 
