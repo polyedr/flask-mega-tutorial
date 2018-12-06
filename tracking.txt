@@ -108,15 +108,14 @@ https://www.elastic.co/blog/elasticsearch-6-5-0-released
 
 skipped:
 adding it to the .env file as follows:
-ELASTICSEARCH_URL=http://localhost:9200
 
 
 
 
+https://www.elastic.co/guide/en/elasticsearch/guide/current/data-in-data-out.html
+https://www.elastic.co/blog/found-dive-into-elasticsearch-storage
 
 
-
-
-
-
-
+export FLASK_ENV=development
+export ELASTICSEARCH_URL=http://localhost:9200
+flask run
