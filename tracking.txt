@@ -119,3 +119,189 @@ https://www.elastic.co/blog/found-dive-into-elasticsearch-storage
 export FLASK_ENV=development
 export ELASTICSEARCH_URL=http://localhost:9200
 flask run
+
+8.12.2018
+git pull
+cd microblog
+export FLASK_ENV=development
+flask run
+
+https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xvii-deployment-on-linux
+ls ~/.ssh
+
+Deploy on centos-vps droplet 207.154.192.213
+https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2
+ssh-keygen -t rsa
+lucio1
+
+SHA256:A0mC638Y6pxbTjry5MkQf2FXL4kTHErXNoT8JDtDMaw ishuk@linux-q7g7
+
+ssh-copy-id admin@207.154.192.213
+
+sudo vim /etc/ssh/sshd_config
+uncomment
+PermitRootLogin without-password
+PasswordAuthentication no
+sudo systemctl reload sshd.service
+Now with keys.
+
+at the droplet:
+cd ~/environments
+python -m venv microblogenv
+source ./microblogenv/bin/activate
+
+git clone https://github.com/miguelgrinberg/microblog
+cd microblog
+pip install gunicorn psycopg2-binary
+
+about database:
+DATABASE_URL="postgresql://username:password/wordcount_dev
+https://realpython.com/flask-by-example-part-2-postgres-sqlalchemy-and-alembic/
+
+SECRET_KEY=195857d145c74151b28578fee4849c49
+MAIL_SERVER=localhost
+MAIL_PORT=25
+DATABASE_URL=postgresql://user_microblog:user_microblog_password2@localhost:3306/db_microblog
+MS_TRANSLATOR_KEY=a51f43dc5a574f18b522f65fa5885d08
+
+python3 -c "import uuid; print(uuid.uuid4().hex)"
+
+MS Translator Key
+Registration at Azure services
+https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiv-ajax
+
+https://azure.microsoft.com/en-us/services/cognitive-services/translator-text-api/
+https://portal.azure.com/
+
+Grab your keys
+Make an API call to this endpoint: https://api.cognitive.microsoft.com/sts/v1.0
+
+name: translator
+key1: a51f43dc5a574f18b522f65fa5885d08
+key2: 9bed54f17fe248469361e10308293fc5
+
+export FLASK_APP=microblog.py
+add this command to the profile file:
+~/.bashrc
+
+create database db_microblog;
+create user user_microblog password 'user_microblog_password2';
+GRANT all ON DATABASE db_microblog.* TO user_microblog;
+
+flask db upgrade
+
+Setting Up Gunicorn and Supervisor
+
+Below you can see the nginx configuration file for Microblog, which goes in /etc/nginx/sites-enabled/microblog:
+https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-centos-7
+
+How to specify domain name?
+https://code.luasoftware.com/tutorials/flask/things-you-should-know-about-flask-server-name/
+maybe at nginx:
+https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-14-04
+
+pwd certs
+/home/admin/flask_microblog/microblog/certs
+
+
+/etc/nginx/sites-available
+sudo vim s0-n.ru.conf
+
+sudo ln -s /etc/nginx/sites-available/s0-n.ru.conf /etc/nginx/sites-enabled
+
+9.12.2018
+https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-16-04
+https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04
+https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-centos-7
+https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-centos-7
+https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xvii-deployment-on-linux
+
+https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-16-04 Create a systemd Unit File
+https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04 Create a Gunicorn systemd Service File
+
+NGINX configuration to test domain
+https://nginx.org/ru/docs/beginners_guide.html
+
+server {
+    # listen on port 80 (http)
+    listen 80;
+    server_name electr0.ru www.electr0.ru;
+    location / {
+        # redirect any requests to the same URL but on https
+        # return 301 https://$host$request_uri;
+        root /home/admin/flask_microblog/microblog/app/static;
+
+    }
+}
+
+https://tutorials.technology/tutorials/71-How-to-setup-Flask-with-gunicorn-and-nginx-with-examples.html
+
+https://scaleyourcode.com/blog/article/21
+
+At the centos-vps server /etc/nginx/conf.d configuration is active instead of sites-available and sites-enabled
+
+
+Server names
+https://nginx.org/ru/docs/http/server_names.html
+
+
+
+
+server {
+    # listen on port 80 (http)
+    listen 80;
+    server_name s0-n.ru www.s0-.n.ru;
+    location / {
+        # redirect any requests to the same URL but on https
+        return 301 https://$host$request_uri;
+    }
+}
+server {
+    # listen on port 443 (https)
+    listen 443 ssl;
+    server_name s0-n.ru www.s0-.n.ru;
+
+    # location of the self-signed SSL certificate
+    ssl_certificate /home/admin/flask_microblog/microblog/certs/cert.pem;
+    ssl_certificate_key /home/admin/flask_microblog/microblog/certs/key.pem;
+
+    # write access and error logs to /var/log
+    access_log /var/log/microblog_access.log;
+    error_log /var/log/microblog_error.log;
+
+    location / {
+        # forward application requests to the gunicorn server
+        proxy_pass http://localhost:8000;
+        proxy_redirect off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /static {
+        # handle static files directly, without forwarding to the application
+        alias /home/admin/flask_microblog/microblog/app/static;
+        expires 30d;
+    }
+}
+
+
+This works, too
+gunicorn --bind 0.0.0.0:8000 wsgi:app
+
+Now the deploy works, but with localhost option to bind only. An option with socket to bind doesn't work.
+
+Hosting on Heroku
+https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xviii-deployment-on-heroku
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+info@poly-edr.com
+cvcv6987ib7y
+
+
+
+wget https://cli-assets.heroku.com/heroku-cli/channels/stable/heroku-cli-linux-x64.tar.gz -O heroku.tar.gz
+
+wget https://cli-assets.heroku.com/heroku-cli/channels/stable/heroku-cli-v6.14.38-9bfc11a-linux-x86.tar.gz -O heroku.tar.gz
+
+
+mv heroku-cli-v6.14.38-9bfc11a-linux-x64 /usr/local/lib/heroku
+
+mv heroku-cli-v6.14.38-9bfc11a-linux-x86 /usr/local/lib/heroku
+
+
+ii@linux-ldbe:/usr/local/lib> cd /home/ii/Desktop/Programming/Django/mysite
+ii@linux-ldbe:~/Desktop/Programming/Django/mysite> heroku create
+Creating app... done, ⬢ boiling-journey-66209
+https://boiling-journey-66209.herokuapp.com/ | https://git.heroku.com/boiling-journey-66209.git
+
+
