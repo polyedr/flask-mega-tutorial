@@ -291,17 +291,45 @@ gunicorn --bind 0.0.0.0:8000 wsgi:app
 
 Now the deploy works, but with localhost option to bind only. An option with socket to bind doesn't work.
 
+
+10.12.2018
 Hosting on Heroku
 https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xviii-deployment-on-heroku
 
+at work computer first complete upgrade to tumbleweed is essential to unlock yast
+
+skipped
+
+now 
+https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xix-deployment-on-docker-containers
+
+sudo docker run --name microblog -d -p 8000:5000 --rm -e SECRET_KEY=f3cfe107fbd127361daa994eefdc9170 microblog:latest
+
+docker with postgresql
+https://hub.docker.com/_/postgres/
+https://docs.docker.com/engine/examples/postgresql_service/
+
+Adding a MySQL Container
+
+PostrgeSQL container
+https://medium.com/@lvthillo/connect-from-local-machine-to-postgresql-docker-container-f785f00461a7
+
+docker run --name mysql -d -e MYSQL_RANDOM_ROOT_PASSWORD=yes \
+    -e MYSQL_DATABASE=microblog -e MYSQL_USER=microblog \
+    -e MYSQL_PASSWORD=<database-password> \
+    mysql/mysql-server:5.7
+
+
+docker run -d -p 5432:5432 --name my-postgres -e POSTGRES_PASSWORD=password1 microblog
+
+sudo docker run --name my-postgres -d -e  POSTGRES_PASSWORD=password1 microblog
 
 
 
+docker run --name microblog -d -p 8000:5000 --rm -e SECRET_KEY=f3cfe107fbd127361daa994eefdc9170 --link postgresql:dbserver -e DATABASE_URL=postgresql://microblog:password1@dbserver/microblog microblog:latest
 
+sudo docker run --name microblog -d -p 8000:5000 --rm -e SECRET_KEY=f3cfe107fbd127361daa994eefdc9170 --link my-postgres:dbserver -e DATABASE_URL=my-postgres://microblog:password1@dbserver/microblog microblog:latest
 
-
-
-
-
-
+Skipped:
+To be able to access your account from the command line, you need to log in with the docker login command:
 
